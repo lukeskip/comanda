@@ -15,5 +15,9 @@ class Utils
         return Carbon::parse($date)->translatedFormat('D d/m Y');
     }
 
+    public static function getSlug($string){
+        return strtolower(str_replace(" ", "-", $string));
+    }   
+
   
 }

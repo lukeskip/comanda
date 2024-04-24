@@ -13,6 +13,10 @@ return new class extends Migration
     {
         Schema::create('dish_categories', function (Blueprint $table) {
             $table->id();
+            $table->string('label');
+            $table->string('slug');
+            $table->unsignedBigInteger('restaurant_id'); 
+            $table->foreign('restaurant_id')->references('id')->on('restaurants')->onDelete('cascade');
             $table->timestamps();
         });
     }

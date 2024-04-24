@@ -40,7 +40,7 @@ class MenuService
 
         if ($menu) {
 
-            $menu->load('dishes');
+            $menu->load('dishes','dishes.categories');
 
             if($edit){
                 return [
@@ -56,7 +56,7 @@ class MenuService
                     'description' => $menu->description,
                     'active' => $menu->active,
                     'restaurant_id' => $menu->restaurant_id,
-                    'dishes' =>  $menu->dishes()->paginate()->toArray(),
+                    'dishes' =>  $menu->dishes()->with('categories')->paginate()->toArray(),
                 ];
             }
         } else {

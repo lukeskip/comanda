@@ -6,6 +6,7 @@ use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use App\Models\Dish;
 use App\Models\Menu;
+use App\Models\DishCategory;
 use Faker\Factory as Faker;
 
 class DishSeeder extends Seeder
@@ -17,14 +18,12 @@ class DishSeeder extends Seeder
     {
         $faker = Faker::create();
 
-        // Obtener todos los menús
         $menus = Menu::all();
 
-        // Iterar sobre cada menú
         foreach ($menus as $menu) {
-            // Crear 30 platillos por cada menú
+
             for ($i = 0; $i < 30; $i++) {
-                Dish::create([
+                $dish = Dish::create([
                     'name' => $faker->word,
                     'description' => $faker->sentence,
                     'price' => $faker->randomFloat(2, 5, 50),
@@ -32,6 +31,16 @@ class DishSeeder extends Seeder
                     'image' => 'https://via.placeholder.com/300x200', 
                     'menu_id' => $menu->id,
                 ]);
+
+                $categories = DishCategory::where('restaurant_id',$menu->restaurant->id)->get();
+                $numCategories = rand(2, 3);
+                $randomCategories = collect($categories)->random($numCategories);
+                
+                foreach ($randomCategories as $randomCategory) {
+                    $category = DishCategory::where('label', $randomCategory->label)->first();
+                    $dish->categories()->attach($category);
+
+                }
             }
         }
     }
