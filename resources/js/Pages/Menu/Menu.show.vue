@@ -1,7 +1,7 @@
 <script setup>
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
 import { Head } from '@inertiajs/vue3';
-import TableComponent from '@/Components/TableComponent.vue';
+import Cards from '@/Components/Cards.vue';
 
 const props = defineProps({
     menu:{
@@ -25,7 +25,7 @@ const props = defineProps({
             <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
                 <div class="bg-white shadow-sm sm:rounded-lg">
                     
-                    <TableComponent v-if="menu.dishes" :items="menu.dishes" :actions="['delete']" root="dishes"/>
+                    <Cards v-if="menu.dishes" :items="menu.dishes"/>
 
                 </div>
             </div>

@@ -65,7 +65,7 @@
 
 <script setup>
 import { ref } from 'vue';
-import showLabel from '@/Helpers/showLabel.js';
+import showLabel from '@/helpers/showLabel.js';
 import { Link,router } from '@inertiajs/vue3';
 import Pagination from '@/Components/Pagination.vue'
 import ActionButton from '@/Components/ActionButton.vue';
