@@ -51,7 +51,12 @@ class MenuController extends Controller
      */
     public function show(Menu $menu)
     {
-        //
+        $menu =  $this->service->getById($menu);
+        return Inertia::render('Menu/Menu.show', [
+            'canLogin' => Route::has('login'),
+            'canRegister' => Route::has('register'),
+            'menu' => $menu,            
+        ]);
     }
 
     /**

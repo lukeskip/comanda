@@ -40,6 +40,8 @@ class MenuService
 
         if ($menu) {
 
+            $menu->load('dishes');
+
             if($edit){
                 return [
                     'name'=> ['value'=>$menu->name,'type'=>'string'],
@@ -54,6 +56,7 @@ class MenuService
                     'description' => $menu->description,
                     'active' => $menu->active,
                     'restaurant_id' => $menu->restaurant_id,
+                    'dishes' =>  $menu->dishes()->paginate()->toArray(),
                 ];
             }
         } else {
