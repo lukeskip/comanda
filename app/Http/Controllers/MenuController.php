@@ -5,15 +5,29 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreMenuRequest;
 use App\Http\Requests\UpdateMenuRequest;
 use App\Models\Menu;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Route;
+use App\Services\MenuService;
+use Inertia\Inertia;
 
 class MenuController extends Controller
 {
+    public function __construct(MenuService $menuService)
+    {
+        $this->service = $menuService;
+    }
+    
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
+        $menus =  $this->service->getAll($request); 
+        return Inertia::render('Menu/Menu.index', [
+            'canLogin' => Route::has('login'),
+            'canRegister' => Route::has('register'),
+            'menus' => $menus,            
+        ]);
     }
 
     /**
@@ -61,6 +75,6 @@ class MenuController extends Controller
      */
     public function destroy(Menu $menu)
     {
-        //
+        return $this->service->delete($menu);
     }
 }
