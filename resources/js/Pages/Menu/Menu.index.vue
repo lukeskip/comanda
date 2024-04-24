@@ -4,7 +4,7 @@ import { Head } from '@inertiajs/vue3';
 import TableComponent from '@/Components/TableComponent.vue';
 
 const props = defineProps({
-    restaurants:{
+    menus:{
         type:Object,
         required:true
     }
@@ -12,7 +12,7 @@ const props = defineProps({
 </script>
 
 <template>
-    <Head title="Restaurantes" />
+    <Head title="Menus" />
 
     <AuthenticatedLayout>
         <template #header>
@@ -25,7 +25,7 @@ const props = defineProps({
             <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
                 <div class="bg-white shadow-sm sm:rounded-lg">
                     
-                     <TableComponent :items="restaurants" :actions="['delete']" root="restaurants"/>
+                     <TableComponent :items="menus" :actions="['delete']" root="menus"/>
 
                 </div>
             </div>
