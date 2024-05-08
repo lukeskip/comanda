@@ -9,6 +9,7 @@ use Database\Seeders\UsertSeeder;
 use Database\Seeders\MenutSeeder;
 use Database\Seeders\DishSeeder;
 use Database\Seeders\DishCategorySeeder;
+use Database\Seeders\TableSeeder;
 
 class DatabaseSeeder extends Seeder
 {
@@ -22,5 +23,6 @@ class DatabaseSeeder extends Seeder
         $this->call(MenuSeeder::class);
         $this->call(DishCategorySeeder::class);
         $this->call(DishSeeder::class);
+        $this->call(TableSeeder::class);
     }
 }
