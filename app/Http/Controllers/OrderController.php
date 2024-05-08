@@ -7,6 +7,11 @@ use Illuminate\Http\Request;
 
 class OrderController extends Controller
 {
+
+    public function addItemToOrder()
+    {
+        //
+    }
     /**
      * Display a listing of the resource.
      */
