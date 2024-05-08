@@ -44,13 +44,14 @@ class Table extends Model
 
     public function getActiveOrderAttribute()
     {
-        $activeOrder = $this->orders->where('status','active')->first();
+        $activeOrder = $this->orders()->where('status','active')->with('dishes')->first();
+        
 
         if(!$activeOrder){
             $activeOrder = Order::create(['status' =>'active','table_id'=>$this->id]);
         }
 
-        return $activeOrder->id;
+        return $activeOrder;
         
     }
 

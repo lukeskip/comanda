@@ -18,8 +18,10 @@ use Illuminate\Support\Facades\Broadcast;
 // });
 
 
-Broadcast::channel('channel-cart', function ($user) { 
-    return auth()->check();
+
+
+Broadcast::channel('channel-order', function ($user) { 
+    return true;
 });
 
 

@@ -4,13 +4,26 @@ namespace App\Http\Controllers;
 
 use App\Models\Order;
 use Illuminate\Http\Request;
+use App\Services\OrderService;
 
 class OrderController extends Controller
 {
+    function __construct(OrderService $orderService){
 
-    public function addItemToOrder()
+        $this->service = $orderService;
+        $this->rules = [
+            'order_id' => 'required',
+            'dish_id' => 'required',
+        ];
+    }
+
+    public function addItemToOrder(Order $order, Request $request)
     {
-        //
+        $validatedData = $request->validate([
+            'dish_id' => 'required',
+        ]);
+
+        return $this->service->addItem($order,$request);
     }
     /**
      * Display a listing of the resource.

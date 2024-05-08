@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Menu;
 use App\Models\DishCatgory;
+use App\Models\Order;
 
 class Dish extends Model
 {
@@ -14,6 +15,10 @@ class Dish extends Model
     public function menu()
     {
         return $this->belongsTo(Menu::class,"menu_id");
+    }
+
+    public function orders(){
+        return $this->belongsToMany(Order::class,'order_dish_user')->withTimestamps();;
     }
 
     public function categories()

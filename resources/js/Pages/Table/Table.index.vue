@@ -12,9 +12,12 @@ const props = defineProps({
     }
 });
 
-onMounted(async()=>{
+const tokenRef = ref();
 
-    console.log(window.Echo);
+
+
+onMounted(async()=>{
+    
     window.Echo.private('channel-cart')
     .listen('.cart-item-added', (event) => {
         console.log('Evento CartItemAdded recibido:', event);

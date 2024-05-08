@@ -32,13 +32,12 @@ const props = defineProps({
     },
 });
 
-onMounted(()=>{
-    // console.log(props);
-})
+
 
 const addItem = async(id)=>{
     const response = await axios.post(route('orders.add',props.order),{
-        dish_id:id
+        dish_id:id,
+        token:localStorage.getItem('token')
     });
     console.log(response);
 }; 
