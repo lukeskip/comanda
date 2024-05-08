@@ -1,13 +1,25 @@
 <script setup>
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
+import { onMounted } from 'vue';
 import { Head } from '@inertiajs/vue3';
 import TableComponent from '@/Components/TableComponent.vue';
+
 
 const props = defineProps({
     menus:{
         type:Object,
         required:true
     }
+});
+
+onMounted(async()=>{
+
+    console.log(window.Echo);
+    window.Echo.private('channel-cart')
+    .listen('.cart-item-added', (event) => {
+        console.log('Evento CartItemAdded recibido:', event);
+        // Manejar los datos del evento aquí
+    });
 });
 </script>
 

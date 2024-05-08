@@ -11,6 +11,7 @@ const props = defineProps({
 });
 </script>
 
+
 <template>
     <Head title="Restaurantes" />
 

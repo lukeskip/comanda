@@ -20,6 +20,9 @@ Route::middleware('guest')->group(function () {
     Route::get('login', [AuthenticatedSessionController::class, 'create'])
                 ->name('login');
 
+    
+
+
     Route::post('login', [AuthenticatedSessionController::class, 'store']);
 
     Route::get('forgot-password', [PasswordResetLinkController::class, 'create'])
@@ -36,6 +39,8 @@ Route::middleware('guest')->group(function () {
 });
 
 Route::middleware('auth')->group(function () {
+    Route::get('/login/redirect', [AuthenticatedSessionController::class, 'redirect'])->name('login-redirect');
+     
     Route::get('verify-email', EmailVerificationPromptController::class)
                 ->name('verification.notice');
 

@@ -5,7 +5,8 @@ import InputError from '@/Components/InputError.vue';
 import InputLabel from '@/Components/InputLabel.vue';
 import PrimaryButton from '@/Components/PrimaryButton.vue';
 import TextInput from '@/Components/TextInput.vue';
-import { Head, Link, useForm } from '@inertiajs/vue3';
+import { Head, Link, useForm,router } from '@inertiajs/vue3';
+import axios from 'axios';
 
 defineProps({
     canResetPassword: {
@@ -24,7 +25,15 @@ const form = useForm({
 
 const submit = () => {
     form.post(route('login'), {
-        onFinish: () => form.reset('password'),
+        onFinish: (data) => {
+            form.reset('password')
+        },
+        onSuccess: async(page) => {     
+            const response = await axios.get('/login/redirect');
+            if (response.data.access_token) {
+                localStorage.setItem('access_token', response.data.access_token);
+            }
+        },
     });
 };
 </script>
