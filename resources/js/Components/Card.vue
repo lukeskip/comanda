@@ -27,11 +27,13 @@
             
         </div>
     </div>
-
+    <Modal :show="showModal" @close="showModal = false" >
+        <AddDishForm :formData="formData"/>
+    </Modal>
 </template>
 <script setup>
 import Categories from '@/Components/Categories.vue';
-import axios from 'axios';
+import Modal from '@/Components/Modal.vue';
 import { onMounted,ref } from 'vue';
 const props = defineProps({
     item:{
@@ -43,7 +45,11 @@ const props = defineProps({
     },
 });
 
-
+const showModal= ref(false);
+const toggleModal = () => {
+    console.log('debería de abrirse');
+    showModal.value = !showModal.value;
+};
 const counter = ref(0);
 
 const counterChange = (type)=>{
@@ -57,10 +63,11 @@ const counterChange = (type)=>{
 }
 
 const addItem = async(id)=>{
-    const response = await axios.post(route('orders.add',props.order),{
+    formData.value = {
         dish_id:id,
         token:localStorage.getItem('token')
-    });
-    console.log(response);
+    }
+    toggleModal();
+    
 }; 
 </script>
