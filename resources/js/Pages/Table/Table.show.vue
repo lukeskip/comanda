@@ -52,8 +52,6 @@ onMounted(()=>{
         <template #header>
             <h2 class="font-semibold text-xl text-gray-800 leading-tight">Restaurante</h2>
         </template>
-
-        {{ table.activeOrder.dishes.length }}
         
         <div class="py-12">
             <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Order;
 use Illuminate\Http\Request;
 use App\Services\OrderService;
+use Inertia\Inertia;
 
 class OrderController extends Controller
 {
@@ -54,7 +55,9 @@ class OrderController extends Controller
      */
     public function show(Order $order)
     {
-        //
+        return Inertia::render('Order/Order.show', [
+            'order' => $order,            
+        ]);
     }
 
     /**

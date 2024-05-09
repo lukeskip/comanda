@@ -7,6 +7,7 @@
             </figure>
             <div class="h-40">
                 <h3 class="mt-4 text-lg font-bold">{{ item.name }}</h3>
+                <div>${{ item.price }}</div>
                 <p class="">{{ item.description }}</p>
                 <button class="addItem" v-if="order" @click="addItem(item.id)"> agregar</button>
                 <div class="mt-2">

@@ -50,8 +50,6 @@ class TableController extends Controller
     {
         
         return Inertia::render('Table/Table.show', [
-            'canLogin' => Route::has('login'),
-            'canRegister' => Route::has('register'),
             'table' => $table,            
         ]);
     }

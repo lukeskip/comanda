@@ -13,7 +13,13 @@ class Order extends Model
         'status', 'table_id'
     ];
 
+    protected $appends = ['total'];
+
     public function dishes(){
         return $this->belongsToMany(Dish::class,'order_dish_user')->withTimestamps();
+    }
+
+    public function getTotalAttribute(){
+        return $this->dishes->sum('price');
     }
 }
