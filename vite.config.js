@@ -21,6 +21,13 @@ export default defineConfig(({ mode }) => {
                 },
             }),
         ],
+        css: {
+            preprocessorOptions: {
+                scss: {
+                    additionalData: `@import "resources/scss/globals.scss";`,
+                },
+            },
+        },
         define: {
             'process.env': env
         }

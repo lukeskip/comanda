@@ -50,7 +50,7 @@ onMounted(()=>{
 
     <PublicLayout>
         <template #header>
-            <h2 class="font-semibold text-xl text-gray-800 leading-tight">Restaurante</h2>
+            <h2 class="font-semibold text-xl text-gray-800 leading-tight">{{table.restaurant.name}}</h2>
         </template>
         
         <div class="py-12">

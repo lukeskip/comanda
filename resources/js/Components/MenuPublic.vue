@@ -127,7 +127,14 @@
     import ResponsiveNavLink from '@/Components/ResponsiveNavLink.vue';
     import { Link } from '@inertiajs/vue3';
     import { ref } from 'vue';
-    import menu from '@/menu'
+    
 
     const showingNavigationDropdown = ref(false);
+
+    defineProps({
+        menu:{
+            type:Object,
+            default:{}
+        }
+    })
 </script>
