@@ -19,6 +19,10 @@ class OrderService {
         }
         
         $order->dishes()->attach($dish->id, ['token' => $request->token,'user_id'=>$userId]);
+        
+        $orderDishUser = $order->dishes()->wherePivot('dish_id', $dish->id)->first()->pivot;
+
+        return dump($orderDishUser->options()->attach());
 
         event(new OrderUpdated($order->id));
 

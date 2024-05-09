@@ -22,7 +22,7 @@
                         +
                     </button>
                 </div>
-                <button class="addItem" v-if="order" @click="addItem(item.id)">Ordenar</button>
+                <button class="btn addItem" v-if="order" @click="addItem(item.id)">Ordenar</button>
             </footer>
             
         </div>
@@ -35,6 +35,7 @@
 import Categories from '@/Components/Categories.vue';
 import Modal from '@/Components/Modal.vue';
 import { onMounted,ref } from 'vue';
+import AddDishForm from '@/Components/AddDishForm.vue'
 const props = defineProps({
     item:{
         type:Object,
@@ -46,6 +47,8 @@ const props = defineProps({
 });
 
 const showModal= ref(false);
+const formData= ref({});
+
 const toggleModal = () => {
     console.log('debería de abrirse');
     showModal.value = !showModal.value;
@@ -65,6 +68,7 @@ const counterChange = (type)=>{
 const addItem = async(id)=>{
     formData.value = {
         dish_id:id,
+        order:props.order,
         token:localStorage.getItem('token')
     }
     toggleModal();
