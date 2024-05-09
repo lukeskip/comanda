@@ -1,3 +1,6 @@
+@import "./_variables.scss";
+@import "./card.scss";
+
 body {
-    background-color: red;
+    background-color: $lightGray;
 }

@@ -37,7 +37,7 @@ class Table extends Model
             ->where('active', true)
             ->first();
 
-        $menu->setRelation('dishes', $menu->dishes()->with('categories')->paginate());
+        $menu->setRelation('dishes', $menu->dishes()->with('categories')->get());
         
         return $menu;
     }

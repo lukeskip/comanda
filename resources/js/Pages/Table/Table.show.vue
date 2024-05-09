@@ -34,7 +34,7 @@ const setToken = ()=>{
 
 onMounted(()=>{
     setToken();
-
+    console.log(props.table);
     window.Echo.channel('channel-order')
     .listen('.order-updated', (event) => {
         if(event.item === props.table.activeOrder.id){
@@ -55,7 +55,7 @@ onMounted(()=>{
         
         <div class="py-12">
             <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-                <div class="bg-white shadow-sm sm:rounded-lg">
+                <div class="">
                     
                     <Cards v-if="table.menu.dishes" :items="table.menu.dishes" :order="table.activeOrder.id"/>
 
