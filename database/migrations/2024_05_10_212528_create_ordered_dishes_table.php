@@ -17,6 +17,7 @@ return new class extends Migration
             $table->foreignId('dish_id')->constrained()->onDelete('cascade');
             $table->unsignedBigInteger('user_id')->nullable();
             $table->string('token')->nullable();
+            $table->longtext('message')->nullable();
             $table->timestamps();
         });
     }

@@ -24,7 +24,8 @@ class OrderService {
         $newOrderedDish = $order->orderedDishes()->create([
             'dish_id' => $request->dish_id,
             'token' => $request->token,
-            'user_id' => $userId
+            'user_id' => $userId,
+            'message'=>$request->message
         ]);
 
         foreach ($request->variations as $key => $options) {

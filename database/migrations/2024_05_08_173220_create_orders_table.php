@@ -15,7 +15,6 @@ return new class extends Migration
             $table->id();
             $table->string('status');
             $table->uuid('table_id');
-            $table->longtext('message')->nullable();
             $table->timestamps();
         });
     }

@@ -15,7 +15,7 @@
         </div>
 
         <h3>Mensaje a la cocina</h3>
-        <textarea name="message" v-model="formData['message']"></textarea>
+        <textarea name="message" v-model="finalFormData['message']"></textarea>
         <footer>
             <div>
                 <button class="btn" @click="addItem">Agregar</button>

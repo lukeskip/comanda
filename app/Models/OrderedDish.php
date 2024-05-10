@@ -10,7 +10,7 @@ class OrderedDish extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['order_id', 'dish_id','user_id','token'];
+    protected $fillable = ['order_id', 'dish_id','user_id','token','message'];
     protected $appends = ['price'];
 
     public function options()
