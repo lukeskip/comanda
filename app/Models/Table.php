@@ -42,9 +42,10 @@ class Table extends Model
         return $menu;
     }
 
+
     public function getActiveOrderAttribute()
     {
-        $activeOrder = $this->orders()->where('status','active')->with('dishes')->first();
+        $activeOrder = $this->orders()->where('status','active')->with('orderedDishes')->first();
         
 
         if(!$activeOrder){

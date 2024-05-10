@@ -1,7 +1,4 @@
 .variations {
-    h3 {
-        @apply font-bold capitalize;
-    }
     .options {
         @apply flex flex-wrap gap-2 my-2;
         .option {

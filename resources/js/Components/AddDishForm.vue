@@ -5,6 +5,7 @@
         <div class="variations">
             <div class="variation" v-if="dish.variations" v-for="variation in dish.variations" >
                 <h3>{{ variation.name }}:</h3>
+                <div class="error" v-if="errors[variation.name]">{{ errors[variation.name] }}</div>
                 <div class="options">
                     <div v-for="option in variation.options">
                         <div class="option" @click="selectOption(variation, option)" :class="{ 'selected': isSelected(variation, option) }">{{option.label}} +${{option.price}}</div>
@@ -13,10 +14,13 @@
             </div>
         </div>
 
-        <label for="">Mensaje a la cocina</label>
+        <h3>Mensaje a la cocina</h3>
         <textarea name="message" v-model="formData['message']"></textarea>
         <footer>
-            <button class="btn" @click="addItem">Agregar</button>
+            <div>
+                <button class="btn" @click="addItem">Agregar</button>
+                <button class="btn" @click="emit('close')">Cancelar</button>
+            </div>
             <div class="price">
                 Total: ${{ checkPrice() }}
             </div>
@@ -24,10 +28,9 @@
     </div>
 </template>
 <script setup>
-import { onMounted,ref } from 'vue';
+import { onMounted,ref,defineEmits } from 'vue';
 
-
-
+const emit  = defineEmits(['close']);
 
 const props = defineProps({
     dish:{
@@ -35,17 +38,17 @@ const props = defineProps({
     },
     formData:{
         type:Object
-    }
+    },
 });
 
 const finalFormData  = ref({variations:{}});
+const errors = ref({});
 
 onMounted(()=>{
     finalFormData.value = {...finalFormData.value,...props.formData,}; 
     console.log(props.formData);
 });
 
-const errors = ref({});
 
 const checkMax = (variation)=>{
     if(finalFormData.value.variations[variation.name] && finalFormData.value.variations[variation.name].length >= variation.max){
@@ -102,30 +105,47 @@ const isSelected = (variation,option)=>{
     
 }
 
+const checkMin = ()=>{
+    errors.value = {};
+    props.dish.variations.map((item)=>{
+        const min = item.min;
+        if(min > 0 && (!finalFormData.value.variations[item.name] || finalFormData.value.variations[item.name].length < min)){
+            errors.value = {...errors.value, [item.name]:`Tienes que elegir al menos ${min} opciones`};
+        }
+    })
+
+    if(Object.keys(errors.value).length){
+        return false;
+    }
+
+    return true;
+}
+
 const addItem = async()=>{
-    checkVariations();
-    try {
-        const response = await axios.post(route('orders.add',props.formData.order),{
-            ...props.formData
-        });
-    } catch (error) {
-        console.log(error);
+    if(checkMin()){
+        try {
+            const response = await axios.post(route('orders.add',props.formData.order),{
+                ...finalFormData.value,
+            });
+            emit('close');
+        } catch (error) {
+            console.log(error);
+        }
     }
 }
 
 const checkPrice = ()=>{
-    console.log("se suman");
+    
     let price = props.dish.price;
     for (const variation in finalFormData.value.variations) {
         
         const totalOptions = finalFormData.value.variations[variation].reduce((accumulator,option)=>{
-            console.log("Esta es la opción",option);
             return accumulator + Number(option.price); 
         },0)
 
-            price += totalOptions;
-        
+        price += totalOptions;
     }
+    
     return price;
 }
 

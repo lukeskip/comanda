@@ -3,6 +3,7 @@ import PublicLayout from '@/Layouts/PublicLayout.vue';
 import { Head, router } from '@inertiajs/vue3';
 import Cards from '@/Components/Cards.vue';
 import { onMounted, ref } from 'vue';
+import PrimaryButton from '@/Components/PrimaryButton.vue';
 
 
 const props = defineProps({
@@ -61,6 +62,11 @@ onMounted(()=>{
 
                 </div>
             </div>
+        </div>
+        <div class="bottomMenu">
+            <PrimaryButton>
+                Revisar la orden {{ table.activeOrder.ordered_dishes.length }} {{ table.activeOrder.total }}
+            </PrimaryButton>
         </div>
     </PublicLayout>
 </template>

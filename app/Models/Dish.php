@@ -18,7 +18,7 @@ class Dish extends Model
     }
 
     public function orders(){
-        return $this->belongsToMany(Order::class,'order_dish_user')->withTimestamps();;
+        return $this->belongsToMany(Order::class)->withTimestamps();;
     }
     public function variations(){
         return $this->hasMany(Variation::class);

@@ -8,7 +8,7 @@
             </figure>
             <div class="info">
                 <h3>{{ item.name }}</h3>
-                <div class="price">{{ item.price }}</div>
+                <div> <span v-if="item.variations.length">Desde</span> <span class="price">{{ item.price }}</span></div>
                 
                 <p class="description">{{ item.description }}</p>
             </div>
@@ -19,7 +19,7 @@
         </div>
     </div>
     <Modal :show="showModal" @close="showModal = false" >
-        <AddDishForm :formData="formData" :dish="item"/>
+        <AddDishForm :formData="formData" :dish="item" @close="toggleModal()"/>
     </Modal>
 </template>
 <script setup>
@@ -41,7 +41,6 @@ const showModal= ref(false);
 const formData= ref({});
 
 const toggleModal = () => {
-    console.log('debería de abrirse');
     showModal.value = !showModal.value;
 };
 const counter = ref(0);

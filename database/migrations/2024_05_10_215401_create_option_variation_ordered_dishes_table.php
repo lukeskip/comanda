@@ -11,12 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('order_dish_user', function (Blueprint $table) {
+        Schema::create('option_variation_ordered_dishes', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('order_id')->constrained()->onDelete('cascade');
-            $table->foreignId('dish_id')->constrained()->onDelete('cascade');
-            $table->unsignedBigInteger('user_id')->nullable();
-            $table->string('token')->nullable();
+            $table->foreignId('option_variation_id')->constrained()->onDelete('cascade');
+            $table->foreignId('ordered_dish_id')->constrained()->onDelete('cascade');
             $table->timestamps();
         });
     }
@@ -26,6 +24,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('order_dish_user');
+        Schema::dropIfExists('option_variation_ordered_dishes');
     }
 };

@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Dish;
+use App\Models\OrderedDish;
 
 class Order extends Model
 {
@@ -15,11 +16,12 @@ class Order extends Model
 
     protected $appends = ['total'];
 
-    public function dishes(){
-        return $this->belongsToMany(Dish::class,'order_dish_user')->withTimestamps();
+    public function orderedDishes(){
+        return $this->hasMany(OrderedDish::class,'order_id');
     }
 
+    
     public function getTotalAttribute(){
-        return $this->dishes->sum('price');
+        return $this->orderedDishes->sum('price');
     }
 }

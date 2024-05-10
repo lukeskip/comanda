@@ -4,14 +4,14 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use App\Models\OrderDishUser;
+use App\Models\OrderedDish;
 
 class OptionVariation extends Model
 {
     use HasFactory;
 
-    public function orderDishUsers()
+    public function orderedDishes()
     {
-        return $this->belongsToMany(OrderDishUser::class);
+        return $this->belongsToMany(OrderedDish::class);
     }
 }
