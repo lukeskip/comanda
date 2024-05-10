@@ -7,6 +7,7 @@ use Illuminate\Database\Seeder;
 use App\Models\Dish;
 use App\Models\Variation;
 use App\Models\OptionVariation;
+use Faker\Factory as Faker;
 
 class VariationSeeder extends Seeder
 {
@@ -15,24 +16,30 @@ class VariationSeeder extends Seeder
      */
     public function run(): void
     {
+        $faker = Faker::create();
         $dishes = Dish::all();
         foreach($dishes as $dish){
-            $min = $faker->numberBetween(0, 5);
-            $variation = Variation::create([
-                'name' => $faker->randomElement(['size','sidedish','topping']),
-                'min' => $min,
-                'max' => $faker->numberBetween($min, 5),
-            ]);
+            $randomVariation = rand(1,3);
+            for ($i=0; $i <= $randomVariation; $i++) { 
+                $min = $faker->numberBetween(0, 5);
 
-            $randomOptions = rand(1,5);
-            for ($i=0; $i <= $randomOptions; $i++) { 
-                $name = $faker->word;
-                $option = OptionVariation::create([
-                    'name' => $name,
-                    'label' => $name,
-                    'price' => $faker->randomFloat(2, 0, 100),
-                    'variation_id' => $variation->id
+                $variation = Variation::create([
+                    'name' => $faker->randomElement(['size','sidedish','topping']),
+                    'min' => $min,
+                    'max' => $faker->numberBetween($min, 5),
+                    'dish_id' => $dish->id,
                 ]);
+    
+                $randomOptions = rand(1,5);
+                for ($i=0; $i <= $randomOptions; $i++) { 
+                    $name = $faker->word;
+                    $option = OptionVariation::create([
+                        'name' => $name,
+                        'label' => $name,
+                        'price' => $faker->randomFloat(2, 0, 100),
+                        'variation_id' => $variation->id
+                    ]);
+                }
             }
 
 

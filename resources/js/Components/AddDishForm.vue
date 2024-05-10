@@ -1,15 +1,18 @@
 <template>
-    <h3>Personaliza tu platillo</h3>
-    <button class="btn" @click="addItem">Agregar</button>
+    <div class="modalForm">
+        <h3>Personaliza tu platillo</h3>
+        <Variations :variations="variations"/>
+        <button class="btn" @click="addItem">Agregar</button>
+    </div>
 </template>
 <script setup>
 import { onMounted } from 'vue';
+import Variations from '@/Components/Variations.vue'
 
 
 const props = defineProps({
     variations:{
         type:Object,
-        // required:true
     },
     formData:{
         type:Object

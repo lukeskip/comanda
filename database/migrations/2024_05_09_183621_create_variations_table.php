@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string('name');
             $table->integer('min');
             $table->integer('max');
+            $table->foreignId('dish_id')->constrained()->onDelete('cascade');
             $table->timestamps();
         });
     }

@@ -10,6 +10,7 @@ use Database\Seeders\MenutSeeder;
 use Database\Seeders\DishSeeder;
 use Database\Seeders\DishCategorySeeder;
 use Database\Seeders\TableSeeder;
+use Database\Seeders\VariationSeeder;
 
 class DatabaseSeeder extends Seeder
 {
@@ -24,5 +25,6 @@ class DatabaseSeeder extends Seeder
         $this->call(DishCategorySeeder::class);
         $this->call(DishSeeder::class);
         $this->call(TableSeeder::class);
+        $this->call(VariationSeeder::class);
     }
 }

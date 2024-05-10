@@ -28,7 +28,7 @@
         </div>
     </div>
     <Modal :show="showModal" @close="showModal = false" >
-        <AddDishForm :formData="formData"/>
+        <AddDishForm :formData="formData" :variations="item.variations"/>
     </Modal>
 </template>
 <script setup>

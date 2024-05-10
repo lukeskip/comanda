@@ -1,0 +1,10 @@
+.variations {
+    .options {
+        @apply flex flex-wrap gap-5 my-5;
+        .option {
+            background-color: $mainColor;
+            color: white;
+            @apply px-2 py-1 rounded-md capitalize;
+        }
+    }
+}
