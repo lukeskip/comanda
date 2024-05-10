@@ -11,5 +11,12 @@ body {
 }
 
 .modalForm {
+    textarea {
+        width: 100%;
+        height: 80px;
+    }
     @apply p-5;
+    h2 {
+        @apply font-bold text-xl text-center;
+    }
 }

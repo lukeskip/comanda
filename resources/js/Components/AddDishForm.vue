@@ -1,7 +1,9 @@
 <template>
     <div class="modalForm">
-        <h3>Personaliza tu platillo</h3>
+        <h2>Personaliza tu platillo</h2>
         <Variations :variations="variations"/>
+        <label for="">Mensaje a la cocina</label>
+        <textarea name="message" v-model="formData['message']"></textarea>
         <button class="btn" @click="addItem">Agregar</button>
     </div>
 </template>

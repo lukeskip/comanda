@@ -13,15 +13,6 @@
                 <p class="description">{{ item.description }}</p>
             </div>
             <footer>
-                <div class="flex items-center justify-center">
-                    <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-l" @click="counterChange('minus')">
-                        -
-                    </button>
-                    <span class="bg-gray-200 px-4 py-2 font-semibold">{{counter}}</span>
-                    <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-r" @click="counterChange('plus')">
-                        +
-                    </button>
-                </div>
                 <button class="btn addItem" v-if="order" @click="addItem(item.id)">Ordenar</button>
             </footer>
             

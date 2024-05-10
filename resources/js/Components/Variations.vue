@@ -4,7 +4,7 @@
             <h3>{{ variation.name }}</h3>
             <div class="options">
                 <div v-for="option in variation.options" class="option">
-                    {{option.name}}
+                    {{option.name}} +${{option.price}}
                 </div>
             </div>
         </div>
