@@ -32,10 +32,11 @@ class VariationSeeder extends Seeder
     
                 $randomOptions = rand(1,5);
                 for ($i=0; $i <= $randomOptions; $i++) { 
-                    $name = $faker->sentence(3,true);
+                    $label = $faker->words(2, true);
+                    $name = str_replace(' ','-',$label);
                     $option = OptionVariation::create([
                         'name' => $name,
-                        'label' => $name,
+                        'label' => $label,
                         'price' => $faker->numberBetween(0,100),
                         'variation_id' => $variation->id
                     ]);
