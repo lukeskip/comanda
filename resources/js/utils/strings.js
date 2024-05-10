@@ -34,5 +34,8 @@ const strings = {
     transfer:"Transferencia",
     check:"Cheque",
     reference:"Referencia",
+    sidedish:'Guarnición',
+    topping:'Acompañamiento',
+    size:'Tamaño',
 };
 export default strings;
