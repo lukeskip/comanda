@@ -4,14 +4,14 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use App\Models\OptionVariation;
+
 
 class OrderedDish extends Model
 {
     use HasFactory;
 
     protected $fillable = ['order_id', 'dish_id','user_id','token','message'];
-    protected $appends = ['price'];
+    protected $appends = ['price','group'];
 
     public function options()
     {
@@ -20,12 +20,22 @@ class OrderedDish extends Model
 
     public function dish()
     {
-        return $this->belongsTo(Dish::class);
+        return $this->belongsTo(Dish::class,'dish_id');
     }
 
     public function getPriceAttribute(){
+       
         $dishPrice = $this->dish->price;
         $options = $this->options->sum('price');
         return $options + $dishPrice;
+        
+    }
+
+    public function getGroupAttribute(){
+       if($this->user_id){
+        return $this->user_id;
+       }else{
+        return $this->token;
+       }
     }
 }

@@ -1,6 +1,6 @@
 <template>
 
-    <div class="w-full md:w-1/4 p-4">
+    <div class="w-full md:w-1/4 p-4 flex-grow ">
         <div class="card">
             
             <figure>

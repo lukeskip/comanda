@@ -14,7 +14,7 @@ class Order extends Model
         'status', 'table_id'
     ];
 
-    protected $appends = ['total'];
+    protected $appends = ['total','users'];
 
     public function orderedDishes(){
         return $this->hasMany(OrderedDish::class,'order_id');
@@ -23,5 +23,21 @@ class Order extends Model
     
     public function getTotalAttribute(){
         return $this->orderedDishes->sum('price');
+    }
+    public function getUsersAttribute(){
+        $users = $this->orderedDishes->groupBy('group');
+        $count = 0;
+
+        foreach ($users as $user => $orders) {
+            $count += 1;
+            $users[$user] = [
+                'index' => $count,
+                'orders' => $orders,
+                'total' => $orders->sum('price')
+            ];
+ 
+        }
+
+        return $users;
     }
 }

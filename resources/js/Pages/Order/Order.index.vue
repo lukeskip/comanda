@@ -1,6 +1,6 @@
 <script setup>
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
-import { onMounted } from 'vue';
+import { onMounted,ref } from 'vue';
 import { Head } from '@inertiajs/vue3';
 import TableComponent from '@/Components/TableComponent.vue';
 

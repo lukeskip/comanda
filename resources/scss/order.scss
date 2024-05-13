@@ -1,0 +1,33 @@
+.order {
+    h2 {
+        @apply text-left font-bold text-lg;
+    }
+    .yours {
+        @apply mb-5;
+    }
+    .person {
+        @apply mb-5;
+        .total {
+            @apply font-bold text-xl;
+        }
+    }
+    .dish {
+        h3 {
+            @apply font-bold;
+        }
+        .options {
+            @apply ml-4;
+            .option {
+                @apply flex flex-wrap justify-between;
+            }
+        }
+        .price {
+            @apply text-right font-bold;
+        }
+    }
+    @apply p-5;
+
+    footer {
+        @apply py-5 mt-5 w-full;
+    }
+}

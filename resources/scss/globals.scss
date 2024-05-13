@@ -2,6 +2,7 @@
 @import "./card.scss";
 @import "./variations.scss";
 @import "./table.scss";
+@import "./order.scss";
 
 body {
     background-color: $lightGray;
@@ -9,6 +10,13 @@ body {
 
 .btn {
     @apply capitalize bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded;
+}
+
+h2 {
+    @apply font-bold text-xl text-center;
+}
+h3 {
+    @apply font-bold text-xl;
 }
 
 .modalForm {
@@ -28,5 +36,11 @@ body {
     }
     h3 {
         @apply font-bold capitalize;
+    }
+}
+
+.money {
+    &::before {
+        content: "$";
     }
 }

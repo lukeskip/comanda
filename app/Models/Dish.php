@@ -28,4 +28,8 @@ class Dish extends Model
     {
         return $this->belongsToMany(DishCategory::class,'dish_dish_category');
     }
+
+    public function orderedDishes(){
+        return $this->hasMany(OrderedDish::class,'dish_id');
+    }
 }
