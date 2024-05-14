@@ -6,11 +6,14 @@ use App\Models\Table;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 use Illuminate\Support\Facades\Route;
+use App\Services\TableService;
+
 
 class TableController extends Controller
 {
     
-    function __construct(){
+    function __construct(TableService $tableService){
+        $this->service = $tableService;
         $this->rules = [
             'name' => 'required|string|max:255',
             'email' => 'required|email|max:255|unique:users',
@@ -48,7 +51,6 @@ class TableController extends Controller
      */
     public function show(Table $table)
     {
-        
         return Inertia::render('Table/Table.show', [
             'table' => $table,            
         ]);

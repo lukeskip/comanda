@@ -7,21 +7,21 @@
         </template>
         
         <div class="py-12">
-            <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-                <div class="">
-                    
-                    <Cards v-if="table.menu.dishes" :items="table.menu.dishes" :order="table.activeOrder.id"/>
-
-                </div>
-            </div>
+            <Cards v-if="dishes" :items="dishes" :order="table.activeOrder.id"/>
         </div>
         <div class="bottomMenu">
-            <PrimaryButton @click="toggleModal">
-                Revisar la orden {{ table.activeOrder.ordered_dishes.length }} {{ table.activeOrder.total }}
+            <PrimaryButton @click="toggleModal()">
+                Revisar la orden <span class="money">{{ table.activeOrder.total }}</span>
+            </PrimaryButton>
+            <PrimaryButton @click="toggleModal(true)">
+                <i class="fa-solid fa-filter"></i>
             </PrimaryButton>
         </div>
         <Modal :show="showModal" @close="showModal = false" >
             <OrderEmbed :order="table.activeOrder" @close="toggleModal()"/>
+        </Modal>
+        <Modal :show="showModalFilter" @close="showModalFilter = false" >
+            <DishCategories :search="search" :selected="selectedCategory" :categories="table.categories" :cb="filterByCategory" @close="toggleModal(true)"/>
         </Modal>
     </PublicLayout>
 </template>
@@ -33,6 +33,7 @@ import { onMounted, ref } from 'vue';
 import PrimaryButton from '@/Components/PrimaryButton.vue';
 import Modal from '@/Components/Modal.vue';
 import OrderEmbed from '../Order/Order.embed.vue';
+import DishCategories from  '@/Components/DishCategories.vue'
 
 
 const props = defineProps({
@@ -42,12 +43,46 @@ const props = defineProps({
     },
 });
 
+let dishes = ref([...props.table.menu.dishes]);
+let selectedCategory = ref("");
+
 const showModal= ref(false);
-const toggleModal = () => {
-    showModal.value = !showModal.value;
+const showModalFilter= ref(false);
+
+const toggleModal = (filter = false) => {
+    console.log("filter",filter);
+    if(!filter){
+        console.log("debería mostrar la orden");
+        showModal.value = !showModal.value;
+    }else{
+        showModalFilter.value = !showModalFilter.value;
+        
+    }
 };
 
+const search = (input)=>{
+    dishes.value = props.table.menu.dishes.filter((dish)=>{
+        return dish.name.toLowerCase().includes(input.toLowerCase()) || dish.description.toLowerCase().includes(input.toLowerCase());
+    })
+}
+
+const filterByCategory = (category)=>{
+    selectedCategory.value = category;
+    dishes.value = props.table.menu.dishes.filter((dish)=>{
+        return dish.categories.some((item)=>{
+            return item.slug === category;
+        })
+    })
+    window.scrollTo({
+        top: 180,
+        behavior: 'smooth'
+    });
+    
+}
+
+
 const tokenRef = ref();
+
 
 const setToken = ()=>{
     let token = localStorage.getItem('token');

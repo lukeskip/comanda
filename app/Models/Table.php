@@ -10,16 +10,13 @@ use Illuminate\Database\Eloquent\Concerns\HasUuids;
 
 class Table extends Model
 {
-    use HasUuids;
+    use HasUuids,HasFactory;
 
     protected $fillable = [
         'restaurant_id', 'table_number', 'position'
     ];
 
-    protected $appends = ['menu','activeOrder'];
-
-   
-    use HasFactory;
+    protected $appends = ['menu','activeOrder','categories'];
 
     public function restaurant(){
         return $this->belongsTo(Restaurant::class);
@@ -40,6 +37,15 @@ class Table extends Model
         $menu->setRelation('dishes', $menu->dishes()->with('categories','variations.options')->get());
         
         return $menu;
+    }
+    public function getCategoriesAttribute()
+    {
+        $dishes = $this->menu->dishes;
+        $categories = $dishes->flatMap(function ($dish) {
+            return $dish->categories;
+        })->unique('id');
+
+        return $categories;
     }
 
 

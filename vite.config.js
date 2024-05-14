@@ -7,6 +7,11 @@ export default defineConfig(({ mode }) => {
     const env = dotenv.config({ path: `.env` }).parsed;
 
     return {
+        server: {
+            hmr: {
+                host: '192.168.100.112',
+            },
+        },
         plugins: [
             laravel({
                 input: 'resources/js/app.js',

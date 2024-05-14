@@ -19,6 +19,17 @@ h3 {
     @apply font-bold text-xl;
 }
 
+.searchForm {
+    @apply flex gap-2;
+    input {
+        width: 70%;
+    }
+    .button {
+        width: 30%;
+        text-align: center;
+    }
+}
+
 .modalForm {
     textarea {
         width: 100%;
@@ -40,6 +51,7 @@ h3 {
 }
 
 .money {
+    margin-left: 5px;
     &::before {
         content: "$";
     }

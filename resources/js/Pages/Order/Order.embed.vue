@@ -36,8 +36,7 @@ watchEffect(() => {
       <div class="order">
           <div>
               <div class="yours">
-                <div v-if="owner">
-                    <h2>Tu orden</h2>
+                <div v-if="owner.orders">
                     <Person :person="owner"/>
                 </div>
                 <div v-else>

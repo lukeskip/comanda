@@ -1,3 +1,25 @@
+.filtersPage {
+    @apply p-4;
+    .categories {
+        @apply py-4 grid gap-2 justify-center;
+        grid-template-columns: 2fr 1fr 1fr;
+        grid-gap: 10px;
+
+        .category {
+            @apply w-full text-center px-2 py-4 rounded-md capitalize;
+            background-color: $mainColor;
+            color: white;
+            cursor: pointer;
+            &.selected {
+                background-color: $secondaryColor;
+            }
+            height: 100px;
+            &.important {
+                height: 200px;
+            }
+        }
+    }
+}
 .bottomMenu {
     position: fixed;
     bottom: 0;
@@ -5,5 +27,5 @@
     width: 100%;
     height: 80px;
     background-color: $lightGray;
-    @apply flex justify-center px-5 py-4;
+    @apply flex justify-center px-5 py-4 gap-2;
 }

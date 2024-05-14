@@ -1,14 +1,19 @@
 <template>
 
-    <div class="w-full md:w-1/4 p-4 flex-grow ">
+    <div class="w-full sm:w-1/2 md:w-1/2 lg:w-1/3 p-4  flex-grow ">
         <div class="card">
             
-            <figure>
-                <img :src="item.image" alt="Descripción de la imagen">
-            </figure>
+            <header>
+                <figure v-if="item.image">
+                    <img :src="item.image">
+                </figure>
+                <div class="title">
+                    <h3>{{ item.name }}</h3>
+                    <span class="price"> <span v-if="item.variations.length"> Desde</span><span class="money">{{ item.price }}</span></span>
+                </div>
+            </header>
             <div class="info">
-                <h3>{{ item.name }}</h3>
-                <div> <span v-if="item.variations.length">Desde</span> <span class="price">{{ item.price }}</span></div>
+                
                 
                 <p class="description">{{ item.description }}</p>
             </div>
