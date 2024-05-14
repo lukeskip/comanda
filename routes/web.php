@@ -49,3 +49,4 @@ require __DIR__.'/order.php';
 require __DIR__.'/menu.php';
 require __DIR__.'/dish.php';
 require __DIR__.'/table.php';
+require __DIR__.'/orderedDish.php';

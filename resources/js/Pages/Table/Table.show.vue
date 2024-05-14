@@ -50,9 +50,7 @@ const showModal= ref(false);
 const showModalFilter= ref(false);
 
 const toggleModal = (filter = false) => {
-    console.log("filter",filter);
     if(!filter){
-        console.log("debería mostrar la orden");
         showModal.value = !showModal.value;
     }else{
         showModalFilter.value = !showModalFilter.value;
@@ -104,7 +102,6 @@ const setToken = ()=>{
 
 onMounted(()=>{
     setToken();
-    console.log(props.table);
     window.Echo.channel('channel-order')
     .listen('.order-updated', (event) => {
         if(event.item === props.table.activeOrder.id){

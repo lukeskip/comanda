@@ -6,15 +6,16 @@
                 <h3>{{ ordered.dish.name }}</h3>
                 <div class="actions">
 
-                   <a href="" class="action"> <i class="fa-solid fa-pen-to-square"></i></a>
-                   <a href="" class="action"><i class="fa-solid fa-trash"></i></a>
+                   <div class="action" >
+                        <i class="fa-solid fa-pen-to-square"></i>
+                    </div>
+                   <div class="action" @click="deleteOrdered(ordered.id)">
+                    <i class="fa-solid fa-trash"></i>
+                    </div>
          
                 </div>
             </div>
             <div class="info">
-                <!-- <figure>
-                    <img :src="ordered.dish.image" :alt="ordered.dish.name">
-                </figure> -->
                 <div class="options">
                     <div v-for="option in ordered.options" class="option">
                         <div>{{ option.label }}</div>
@@ -36,12 +37,25 @@
 </template>
 <script setup>
 import PrimaryButton from '@/Components/PrimaryButton.vue';
+import {router} from '@inertiajs/vue3';
+import {useStore} from 'vuex';
+
 const props = defineProps({
     person:{
         type:Object,
         required:true
     }
 });
-
-
+const store = useStore();
+const deleteOrdered = async (id)=>{
+    
+    try {
+        
+        store.commit('toggleLoader');
+        const response = await axios.delete(route('orderedDish.destroy',id));
+        store.commit('toggleLoader');
+    } catch (error) {
+        console.log(error);
+    }
+}
 </script>

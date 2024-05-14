@@ -29,6 +29,7 @@
 </template>
 <script setup>
 import { onMounted,ref,defineEmits } from 'vue';
+import {useStore} from 'vuex';
 
 const emit  = defineEmits(['close']);
 
@@ -43,6 +44,7 @@ const props = defineProps({
 
 const finalFormData  = ref({variations:{}});
 const errors = ref({});
+const store = useStore();
 
 onMounted(()=>{
     finalFormData.value = {...finalFormData.value,...props.formData,}; 
@@ -124,9 +126,11 @@ const checkMin = ()=>{
 const addItem = async()=>{
     if(checkMin()){
         try {
+            store.commit('toggleLoader');
             const response = await axios.post(route('orders.add',props.formData.order),{
                 ...finalFormData.value,
             });
+            store.commit('toggleLoader');
             emit('close');
         } catch (error) {
             console.log(error);

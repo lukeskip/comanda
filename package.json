@@ -24,6 +24,7 @@
     "dependencies": {
         "dotenv": "^16.4.5",
         "sweetalert2": "^11.10.8",
-        "vue-masonry-css": "^1.0.3"
+        "vue-masonry-css": "^1.0.3",
+        "vuex": "^4.0.2"
     }
 }

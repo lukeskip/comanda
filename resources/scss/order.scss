@@ -8,6 +8,9 @@
     }
     .person {
         @apply mb-5;
+        .actions {
+            @apply flex flex-wrap;
+        }
         .total {
             @apply font-bold text-xl;
         }

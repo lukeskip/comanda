@@ -1,9 +1,11 @@
 <script setup>
-    import Menu from  '@/Components/Menu.vue'
+    import Menu from  '@/Components/Menu.vue';
+    import Loader from '@/Components/Loader.vue';
 </script>
 
 <template>
     <div>
+        <Loader/>
         <div class="min-h-screen bg-gray-100">
             
             <Menu/>
