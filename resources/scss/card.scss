@@ -14,7 +14,7 @@
             min-width: 120px;
             text-align: center;
             margin-top: -50px;
-            @apply shadow-lg;
+            @apply shadow-2xl;
             img {
                 @apply w-full h-full object-cover;
             }
