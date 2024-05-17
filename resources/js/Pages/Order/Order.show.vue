@@ -3,6 +3,7 @@ import PublicLayout from '@/Layouts/PublicLayout.vue';
 import { Head, router } from '@inertiajs/vue3';
 import Person from '@/Components/Person.vue';
 import { onMounted, ref } from 'vue';
+import orderEmbed from '@/Pages/Order/Order.embed.vue';
 
 
 const props = defineProps({
@@ -33,15 +34,8 @@ onMounted(()=>{
             <h2 class="font-semibold text-xl text-gray-800 leading-tight">Orden</h2>
         </template>
         
-        <div class="py-12">
-            <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-                <div class="bg-white shadow-sm sm:rounded-lg">
-                    <div v-for="user in order.users" v-if="order.users">
-                        <Person/>
-                    </div>
-
-                </div>
-            </div>
+        <div>
+            <orderEmbed :order="order"/>
         </div>
         <div>
             <h3>Total: ${{ order.total }}</h3>

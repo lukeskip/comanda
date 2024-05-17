@@ -17,7 +17,7 @@ class TableSeeder extends Seeder
         $restaurants = Restaurant::all();
 
         foreach($restaurants as $restaurant){
-            for ($i=0; $i < rand(0,10); $i++) { 
+            for ($i=1; $i < rand(1,10); $i++) { 
                 Table::create([
                     'restaurant_id' => $restaurant->id,
                     'table_number' => $i,

@@ -11,6 +11,7 @@ use Database\Seeders\DishSeeder;
 use Database\Seeders\DishCategorySeeder;
 use Database\Seeders\TableSeeder;
 use Database\Seeders\VariationSeeder;
+use Database\Seeders\PermisionSeeder;
 
 class DatabaseSeeder extends Seeder
 {
@@ -19,6 +20,8 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
+        $this->call(PermisionSeeder::class);
+        $this->call(RoleSeeder::class);
         $this->call(RestaurantSeeder::class);
         $this->call(UserSeeder::class);
         $this->call(MenuSeeder::class);

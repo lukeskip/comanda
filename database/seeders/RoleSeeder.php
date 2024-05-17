@@ -21,11 +21,12 @@ class RoleSeeder extends Seeder
         $role->givePermissionTo(Permission::all());
         $role->revokePermissionTo(['edit user','create user','delete user']);
      
-        $role = Role::create(['name' => 'owner','guard_name' => 'web']);
+        $role = Role::create(['name' => 'restaurant','guard_name' => 'web']);
         $role->givePermissionTo(Permission::all());
+    
         $role->revokePermissionTo(['edit user','create user','delete user']);
 
-        $role = Role::create(['name' => 'collaborator','guard_name' => 'web']);
+        $role = Role::create(['name' => 'waiter','guard_name' => 'web']);
         $role->givePermissionTo(Permission::all());
         $role->revokePermissionTo(['edit user','create user','delete user']);
 

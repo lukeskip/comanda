@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Inertia\Inertia;
 use Illuminate\Support\Facades\Route;
 use App\Services\TableService;
+use Illuminate\Support\Facades\Auth;
 
 
 class TableController extends Controller
@@ -18,13 +19,22 @@ class TableController extends Controller
             'name' => 'required|string|max:255',
             'email' => 'required|email|max:255|unique:users',
         ];
+
+        // $this->middleware('can:read table', ['only' => ['index', 'show']]);
+        $this->middleware('can:create table', ['only' => ['create', 'store']]);
+        $this->middleware('can:edit table', ['only' => ['edit', 'update']]);
+        $this->middleware('can:delete table', ['only' => ['destroy']]);
     }
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        //
+        $user = Auth::user();
+        $tables = Table::where('restaurant_id',$user->restaurants->first()->id)->orderBy('table_number')->get();
+        return Inertia::render('Table/Table.index', [
+            'tables' => $tables,            
+        ]);
     }
 
     /**

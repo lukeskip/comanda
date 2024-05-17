@@ -13,11 +13,31 @@ class UserSeeder extends Seeder
      */
     public function run(): void
     {
-        User::create([
+        $user = User::create([
             'name' => 'Sergio García',
             'email' => 'contacto@chekogarcia.com.mx',
             'password' => bcrypt('willy188'),
         ]);
+        $user->assignRole('superadmin'); 
+
+        $user = User::create([
+            'name' => 'Mesero',
+            'email' => 'mesero@correo.com',
+            'password' => bcrypt('willy188'),
+        ]);
+        $user->assignRole('waiter'); 
+        $user->restaurants()->attach(1);
+
+        
+        $user = User::create([
+            'name' => 'Restaurante',
+            'email' => 'restaurant@correo.com',
+            'password' => bcrypt('willy188'),
+        ]);
+        $user->assignRole('restaurant'); 
+        $user->restaurants()->attach(1);
+
+        
         
     }
 }
