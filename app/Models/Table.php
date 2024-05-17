@@ -51,7 +51,7 @@ class Table extends Model
 
     public function getActiveOrderAttribute()
     {
-        $activeOrder = $this->orders()->where('status','active')->with('orderedDishes')->first();
+        $activeOrder = $this->orders()->where('status','active')->with(['orderedDishes.dish.variations.options'])->first();
         
 
         if(!$activeOrder){

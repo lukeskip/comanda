@@ -3,7 +3,7 @@
         <h2>Personaliza tu platillo</h2>
 
         <div class="variations">
-            <div class="variation" v-if="dish.variations" v-for="variation in dish.variations" >
+            <div class="variation" v-if="dish.dish.variations" v-for="variation in dish.dish.variations" >
                 <h3>{{ variation.name }}:</h3>
                 <div class="error" v-if="errors[variation.name]">{{ errors[variation.name] }}</div>
                 <div class="options">
@@ -37,9 +37,6 @@ const props = defineProps({
     dish:{
         type:Object,
     },
-    formData:{
-        type:Object
-    },
 });
 
 const finalFormData  = ref({variations:{}});
@@ -47,8 +44,8 @@ const errors = ref({});
 const store = useStore();
 
 onMounted(()=>{
-    finalFormData.value = {...finalFormData.value,...props.formData,}; 
-    console.log(props.dish);
+    loadInfo();
+
 });
 
 
@@ -121,6 +118,24 @@ const checkMin = ()=>{
     }
 
     return true;
+}
+
+const loadInfo = ()=>{
+    finalFormData.value.message = props.dish.message;
+    props.dish.options.map((option)=>{
+        const variationName = option.variation.name;
+            if(finalFormData.value.variations[variationName]){
+
+                finalFormData.value.variations[variationName] = [
+                    ...finalFormData.value.variations[variationName],
+                    option
+                ];
+            }else{
+                finalFormData.value.variations[variationName] = [option];
+            }
+        
+       
+    });
 }
 
 const addItem = async()=>{

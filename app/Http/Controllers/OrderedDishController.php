@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 use App\Events\OrderUpdated;
-
 use Illuminate\Http\Request;
 use App\Models\OrderedDish;
+use Illuminate\Support\Facades\Auth;
 
 class OrderedDishController extends Controller
 {
@@ -59,8 +59,16 @@ class OrderedDishController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(OrderedDish $orderedDish)
+    public function destroy(Request $request,OrderedDish $orderedDish)
     {   
+
+        if(!Auth::check() || Auth::user()->can('delete orderedDish')){
+            if($request->token !== $orderedDish->token){
+                abort(403, 'No puedes borrar un platillo que otra persona ordenó');
+            }
+        }
+        
+
         $orderId =  $orderedDish->order_id;
         $orderedDish->delete();
         return event(new OrderUpdated($orderId));

@@ -14,4 +14,9 @@ class OptionVariation extends Model
     {
         return $this->belongsToMany(OrderedDish::class);
     }
+
+    public function variation()
+    {
+        return $this->belongsTo(Variation::class,'variation_id');
+    }
 }

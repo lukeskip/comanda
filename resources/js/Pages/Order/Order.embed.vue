@@ -22,6 +22,7 @@ const loadData = ()=>{
 }
 
 onMounted(()=>{
+    console.log(props.order);
     loadData();
 });
 
@@ -37,7 +38,7 @@ watchEffect(() => {
           <div>
               <div class="yours">
                 <div v-if="owner.orders">
-                    <Person :person="owner"/>
+                    <Person :person="owner" :edit="true"/>
                 </div>
                 <div v-else>
                     <h3>No has agregado nigún platillo</h3>

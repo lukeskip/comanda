@@ -15,7 +15,7 @@ class OrderedDish extends Model
 
     public function options()
     {
-        return $this->belongsToMany(OptionVariation::class,'option_variation_ordered_dishes');
+        return $this->belongsToMany(OptionVariation::class,'option_variation_ordered_dishes')->with('variation');
     }
 
     public function dish()
