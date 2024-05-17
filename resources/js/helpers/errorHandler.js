@@ -3,7 +3,7 @@ import { router } from '@inertiajs/vue3';
 import {useStore} from 'vuex';
 
 const errorHandler = (error,store = ()=>{} )=>{
-   
+    console.log(error);
     if(error.response.status !== 422){  
        
         Swal.fire({

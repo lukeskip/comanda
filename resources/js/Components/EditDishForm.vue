@@ -18,7 +18,7 @@
         <textarea name="message" v-model="finalFormData['message']"></textarea>
         <footer>
             <div>
-                <button class="btn" @click="addItem">Agregar</button>
+                <button class="btn" @click="submitUpdateOrdered(dish.id)">Agregar</button>
                 <button class="btn" @click="emit('close')">Cancelar</button>
             </div>
             <div class="price">
@@ -30,6 +30,7 @@
 <script setup>
 import { onMounted,ref,defineEmits } from 'vue';
 import {useStore} from 'vuex';
+import errorHandler from '@/helpers/errorHandler';
 
 const emit  = defineEmits(['close']);
 
@@ -106,7 +107,7 @@ const isSelected = (variation,option)=>{
 
 const checkMin = ()=>{
     errors.value = {};
-    props.dish.variations.map((item)=>{
+    props.dish.dish.variations.map((item)=>{
         const min = item.min;
         if(min > 0 && (!finalFormData.value.variations[item.name] || finalFormData.value.variations[item.name].length < min)){
             errors.value = {...errors.value, [item.name]:`Tienes que elegir al menos ${min} opciones`};
@@ -138,20 +139,6 @@ const loadInfo = ()=>{
     });
 }
 
-const addItem = async()=>{
-    if(checkMin()){
-        try {
-            store.commit('toggleLoader');
-            const response = await axios.post(route('orders.add',props.formData.order),{
-                ...finalFormData.value,
-            });
-            store.commit('toggleLoader');
-            emit('close');
-        } catch (error) {
-            console.log(error);
-        }
-    }
-}
 
 const checkPrice = ()=>{
     
@@ -170,7 +157,26 @@ const checkPrice = ()=>{
 
 
 
-
+const submitUpdateOrdered = async (id)=>{
+    
+    if(checkMin()){
+        try {
+            
+            store.commit('toggleLoader');
+            const response = await axios.post(route('orderedDish.update', id), {
+                id,
+                token: localStorage.getItem('token'),
+                ...finalFormData.value,
+                _method: 'put',
+            });
+            store.commit('toggleLoader');
+            emit('close');
+        } catch (error) {
+            errorHandler(error,store);
+            console.log(error);
+        }
+    }
+}
 
 
 

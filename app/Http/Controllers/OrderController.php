@@ -26,6 +26,7 @@ class OrderController extends Controller
 
         return $this->service->addItem($order,$request);
     }
+    
     /**
      * Display a listing of the resource.
      */

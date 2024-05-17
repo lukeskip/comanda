@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\OrderedDish;
 use Illuminate\Support\Facades\Auth;
 
+
 class OrderedDishController extends Controller
 {
     /**
@@ -53,7 +54,17 @@ class OrderedDishController extends Controller
      */
     public function update(Request $request, OrderedDish $orderedDish)
     {
-        //
+        
+        $optionIds = []; 
+        foreach ($request->variations as $key => $options) {
+            foreach ($options as $option) {
+               array_push($optionIds,$option['id']);
+            }
+        }
+        $orderedDish->options()->sync($optionIds);
+        $orderedDish->update(['message'=>$request->message]);
+
+        return event(new OrderUpdated($orderedDish->order_id));
     }
 
     /**

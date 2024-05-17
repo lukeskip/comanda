@@ -66,6 +66,8 @@ const updateOrdered = (ordered) => {
     item.value = ordered;
     showModal.value = !showModal.value;
 };
+
+
 const toggleModal = () => {
     showModal.value = !showModal.value;
 };
